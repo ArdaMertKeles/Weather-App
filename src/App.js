@@ -52,7 +52,7 @@ function App() {
   }
   const searchLocation = () =>{
     const cityData = async () => {
-      const city = await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${input}&limit=1&appid=${api}`)
+      const city = await axios.get(`https://api.openweathermap.org/geo/1.0/direct?q=${input}&limit=1&appid=${api}`)
       if(input !== null){
         if(city.data.length === 0){
           setError(true)
