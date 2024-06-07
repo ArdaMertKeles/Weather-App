@@ -23,7 +23,7 @@ function App() {
   const [lat,setLat] = useState()
   const [lon,setLon] = useState()
   const [error,setError] = useState(false)
-  const [searche,setSearch] = useState(false)
+  const [search,setSearch] = useState(false)
   const [cityName,setCityName] = useState('')
   const [temperature,setTemperature] = useState('')
   const [weather,setWeather] = useState('')
@@ -44,7 +44,7 @@ function App() {
   const [thunderstormSound] = useSound(thunderstorm)
   const [windSound] = useSound(windy)
 
-  const search = (e) =>{
+  const searchCity = (e) =>{
     setInput(e.target.value)
     if(e.target.value === ''){
       setInput(null)
@@ -70,7 +70,7 @@ function App() {
   }
 
   useEffect(() =>{
-    if(searche === true){
+    if(search === true){
       const weatherData = async () => {
         const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api}&units=metric`)
         setShow(true)
@@ -106,13 +106,13 @@ function App() {
       }
       weatherData();
     }
-  },[searchLocation,api,cloudSound,lat,lon,mistSound,rainSound,snowSound,sunnySound,thunderstormSound,windSound,searche])
+  },[api,cloudSound,lat,lon,mistSound,rainSound,snowSound,sunnySound,thunderstormSound,windSound,search])
 
   return (
     <div className="wrapper">
       <div className='weatherWrapper'>
         <div className='inputBlocks'>
-          <CitySearch img={weatherPNG} setSearchInput={(e) => search(e)} setSearchLocation={searchLocation} />
+          <CitySearch img={weatherPNG} setSearchInput={(e) => searchCity(e)} setSearchLocation={searchLocation} />
           {error && <p className='error'>*There is no city found!</p>}
         </div>
         {show && <div className='weatherShowns'>
