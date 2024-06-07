@@ -106,7 +106,7 @@ function App() {
       }
       weatherData();
     }
-  },[searchLocation,api,cloudSound,lat,lon,mistSound,rainSound])
+  },[searchLocation,api,cloudSound,lat,lon,mistSound,rainSound,snowSound,sunnySound,thunderstormSound,searche])
 
   return (
     <div className="wrapper">
