@@ -1,10 +1,9 @@
-# Getting Started with Create React App
+# This is a live weather app made with React.js [Live Server](https://myweatherapp0.netlify.app/)
+I used an API providing live data for weather fetched with axios.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Ekran görüntüsü 2024-10-06 184915](https://github.com/user-attachments/assets/8cf996d5-9db4-46fa-b255-7611498697b8)
 
-## Available Scripts
-
-In the project directory, you can run:
+![Ekran görüntüsü 2024-10-06 185038](https://github.com/user-attachments/assets/42140b13-5bee-4aac-b70c-afbe9aaa7846)
 
 ### `npm start`
 
