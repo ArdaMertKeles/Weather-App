@@ -1,0 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.leaflet-container {
+  height: 230px;
+  width: 400px;
+}/*# sourceMappingURL=style.css.map */
