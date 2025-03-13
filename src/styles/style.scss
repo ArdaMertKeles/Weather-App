@@ -3,8 +3,57 @@
     padding: 0;
 }
 
+.wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    .weather-container{
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        .header-container{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid black;
+        }
+        .top-container{
+            display: flex;
+        }
+        .bottom-container{
+            display: flex;
+        }
+    }
+}
+
+// Search Location Component
+.search-location{
+    display: flex;
+    gap: 4px;
+    input{
+        background: blue;
+        border: none;
+        outline: none;
+        border-radius: 4px;
+        padding: 6px;
+    }
+    button{
+
+    }
+}
+
+// Current Weather Component
+.current-weather{
+    
+}
+
 // Sizing of map container
 .leaflet-container{
     height: 230px;
     width: 400px;
 } 
+
+.btn{
+    text-transform: capitalize;
+}

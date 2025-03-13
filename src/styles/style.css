@@ -3,7 +3,46 @@
   padding: 0;
 }
 
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.wrapper .weather-container {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+.wrapper .weather-container .header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+}
+.wrapper .weather-container .top-container {
+  display: flex;
+}
+.wrapper .weather-container .bottom-container {
+  display: flex;
+}
+
+.search-location {
+  display: flex;
+  gap: 4px;
+}
+.search-location input {
+  background: blue;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  padding: 6px;
+}
 .leaflet-container {
   height: 230px;
   width: 400px;
+}
+
+.btn {
+  text-transform: capitalize;
 }/*# sourceMappingURL=style.css.map */

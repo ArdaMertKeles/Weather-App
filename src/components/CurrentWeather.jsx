@@ -6,7 +6,7 @@ import WavesIcon from '@mui/icons-material/Waves';
 export const CurrentWeather = () => {
 
     return (
-        <div>
+        <div className='current-weather'>
             <span className="header">Current Weather</span>
             <span className="time">6:25 AM</span>
             <div className="main-details">
