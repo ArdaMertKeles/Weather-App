@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import './styles/style.css'
 import { CurrentWeather } from "./components/CurrentWeather"
 import { Map } from "./components/Map"
@@ -18,6 +18,7 @@ function App() {
   const [lat, setLat] = useState(null)
   const [lon, setLon] = useState(null)
   const [search, setSearch] = useState(false)
+  const [isDark, setIsDark] = useState(true)
 
 
   const searchCityData = async () => {
@@ -28,9 +29,11 @@ function App() {
   }
 
   useEffect(() => {
+    searchCityData()
     if (search === true) {
       const weatherData = async () => {
-        const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`)
+        // const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`)
+        const response = await axios.get(`https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=${7}&appid=${apiKey}`)
         console.log(response)
         // const deneme = await axios.get(`https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=7&appid=${apiKey}&units=metric`)
         // console.log(deneme)
@@ -46,7 +49,7 @@ function App() {
     '& .MuiSwitch-switchBase': {
       margin: 1,
       padding: 0,
-      transform: 'translateX(6px)',
+      transform: 'translateX(4px)',
       '&.Mui-checked': {
         color: '#fff',
         transform: 'translateX(22px)',
@@ -95,26 +98,30 @@ function App() {
     },
   }));
 
+  const memoizedSwitch = useMemo(() => (
+    <MaterialUISwitch onChange={() => setIsDark((prev) => !prev)} sx={{ m: 1 }} defaultChecked />
+  ), []);
+
+
   return (
-    <div className="wrapper">
+    <div className="wrapper" dark-theme={isDark ? 'dark' : 'light'}>
       <div className="weather-container">
         <div className="header-container">
           <span className="search-input">
             <SearchLocation />
           </span>
           <FormControlLabel
-            control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
-            label="MUI switch"
+            control={memoizedSwitch}
           />
         </div>
         <div className="top-container">
           <CurrentWeather />
-          {lat && lon && <Map lat={lat} lon={lon} />}
+          {lat && lon && <Map lat={lat} lon={lon} isDark={isDark} />}
           <PopularCities />
         </div>
         <div className="bottom-container">
           <Forecast />
-          <Summary />
+          <Summary isDark={isDark} />
         </div>
       </div>
     </div>

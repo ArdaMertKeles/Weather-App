@@ -1,6 +1,48 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: "Inter", sans-serif;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform-origin: top;
+  }
+  15% {
+    transform: rotateZ(10deg);
+  }
+  30% {
+    transform: rotateZ(-10deg);
+  }
+  45% {
+    transform: rotateZ(5deg);
+  }
+  60% {
+    transform: rotateZ(-5deg);
+  }
+  75% {
+    transform: rotateZ(2deg);
+  }
+}
+:root {
+  --main-bg-color: #3F77C1;
+  --bg-color: #4170AB;
+  --current-weather-bg-color: #2A5793;
+  --box-bg-color: #3265a8;
+  --summary-bg-color: #4d76a9;
+  --hover-bg-color: #11427d;
+  --text-color: #ffffff;
+}
+
+[dark-theme=dark] {
+  --main-bg-color: #171717;
+  --bg-color: #1e1e1e;
+  --text-color: #fff;
+  --current-weather-bg-color: #444444;
+  --box-bg-color: #353535;
+  --summary-bg-color: #464646;
+  --hover-bg-color: #5d5d5d;
+  --text-color: #ffffff;
 }
 
 .wrapper {
@@ -8,39 +50,230 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background-color: white;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--main-bg-color);
+  color: var(--text-color);
 }
 .wrapper .weather-container {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 65%;
+  gap: 1em;
+  background-color: var(--bg-color);
+  border-radius: 1em;
+  transition: all 0.3s ease-in-out;
+  padding: 1em;
 }
 .wrapper .weather-container .header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid black;
 }
 .wrapper .weather-container .top-container {
   display: flex;
+  gap: 2%;
 }
 .wrapper .weather-container .bottom-container {
   display: flex;
+  gap: 2%;
 }
 
 .search-location {
   display: flex;
+  align-items: center;
   gap: 4px;
 }
-.search-location input {
-  background: blue;
-  border: none;
-  outline: none;
-  border-radius: 4px;
-  padding: 6px;
+.search-location .input {
+  transition: all 0.3s ease-in-out;
+  background-color: var(--text-color);
 }
+.search-location .button {
+  width: 3.25em;
+  height: 3.25em;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--current-weather-bg-color);
+  border-radius: 50%;
+  cursor: pointer;
+  transition-duration: 0.3s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.13);
+  border: none;
+}
+.search-location .icon path {
+  fill: white;
+}
+.search-location .button:hover {
+  background-color: var(--hover-bg-color);
+}
+.search-location .button:hover .icon {
+  animation: shake 0.9s both;
+}
+.search-location .button:active {
+  transform: scale(0.8);
+}
+
+.current-weather {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  border-radius: 1em;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--current-weather-bg-color);
+  gap: 4px;
+  width: 22%;
+}
+.current-weather .header {
+  font-size: 1.5em;
+  font-weight: 600;
+}
+.current-weather .time {
+  font-size: 0.8em;
+}
+.current-weather .main-details {
+  display: flex;
+  align-items: center;
+}
+.current-weather .main-details img {
+  max-width: 50%;
+}
+.current-weather .main-details .weather-box {
+  display: flex;
+  flex-direction: column;
+}
+.current-weather .main-details .weather-box .weather {
+  display: flex;
+  font-size: 2.75em;
+  font-weight: 600;
+}
+.current-weather .details {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8em;
+}
+.current-weather .details .detail-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.popular-cities {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  border-radius: 1em;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--box-bg-color);
+  width: 20%;
+}
+.popular-cities .header {
+  font-size: 1.15em;
+  font-weight: 600;
+}
+.popular-cities .cities {
+  display: flex;
+  flex-direction: column;
+}
+.popular-cities .cities button {
+  width: 100%;
+  color: var(--text-color);
+}
+.popular-cities .cities button:hover {
+  background-color: var(--hover-bg-color);
+}
+
+.forecast-container {
+  display: flex;
+  flex-direction: column;
+  width: 22%;
+  padding: 1em;
+  border-radius: 1em;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--box-bg-color);
+  gap: 8px;
+}
+.forecast-container .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.15em;
+}
+.forecast-container .header span:nth-child(1) {
+  font-size: 1.15em;
+  font-weight: 600;
+}
+.forecast-container .header span:nth-child(2) {
+  border-radius: 4px;
+  font-size: 0.8em;
+  padding: 3px;
+}
+.forecast-container .seven-days {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.forecast-container .seven-days input {
+  display: none;
+}
+.forecast-container .seven-days input[type=radio]:checked + label {
+  background-color: var(--hover-bg-color);
+}
+.forecast-container .seven-days label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8em;
+  transition: 0.3s ease;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.forecast-container .seven-days label:hover {
+  transition: 0.3s ease;
+  background-color: var(--hover-bg-color);
+}
+.forecast-container .seven-days label .day-container {
+  display: flex;
+  align-items: center;
+}
+.forecast-container .seven-days label .day-container img {
+  width: 35px;
+}
+.forecast-container .seven-days label span {
+  padding: 5px;
+}
+
+.summary-container {
+  display: flex;
+  flex-direction: column;
+  border-radius: 1em;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--summary-bg-color);
+}
+.summary-container .header {
+  font-size: 1.15em;
+  font-weight: 600;
+  padding: 12px;
+}
+.summary-container .css-1la267r-MuiAreaElement-root {
+  fill: var(--box-bg-color);
+}
+.summary-container .chart path {
+  stroke: var(--bg-color);
+}
+.summary-container .temperature-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 0.8em;
+}
+
 .leaflet-container {
-  height: 230px;
-  width: 400px;
+  height: 20em;
+  width: 48%;
+  border-radius: 1em;
 }
 
 .btn {
