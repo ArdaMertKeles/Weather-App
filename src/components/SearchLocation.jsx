@@ -4,7 +4,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import SearchIcon from '@mui/icons-material/Search';
 
-export const SearchLocation = () => {
+export const SearchLocation = ({ search, setCity }) => {
 
     return (
         <form className="search-location">
@@ -13,6 +13,7 @@ export const SearchLocation = () => {
                     <Input
                         placeholder='Search for location'
                         id="input-with-icon-adornment"
+                        onChange={(e) => setCity(e.target.value)}
                         startAdornment={
                             <InputAdornment position="start">
                                 <SearchIcon />
@@ -20,9 +21,8 @@ export const SearchLocation = () => {
                         }
                     />
                 </FormControl>
-
             </Box>
-            <button className="button">
+            <button onClick={search} className="button">
                 <SearchIcon className='icon' />
             </button>
         </form>

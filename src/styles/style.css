@@ -59,6 +59,7 @@
   display: flex;
   flex-direction: column;
   width: 65%;
+  min-height: 80%;
   gap: 1em;
   background-color: var(--bg-color);
   border-radius: 1em;
@@ -145,8 +146,11 @@
 }
 .current-weather .main-details .weather-box .weather {
   display: flex;
-  font-size: 2.75em;
+  font-size: 2.25em;
   font-weight: 600;
+}
+.current-weather .main-details .weather-box .description {
+  text-transform: capitalize;
 }
 .current-weather .details {
   display: flex;
@@ -214,33 +218,21 @@
   flex-direction: column;
   gap: 4px;
 }
-.forecast-container .seven-days input {
-  display: none;
-}
-.forecast-container .seven-days input[type=radio]:checked + label {
-  background-color: var(--hover-bg-color);
-}
-.forecast-container .seven-days label {
+.forecast-container .seven-days div {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.8em;
-  transition: 0.3s ease;
+  font-size: 0.85em;
   border-radius: 4px;
-  cursor: pointer;
 }
-.forecast-container .seven-days label:hover {
-  transition: 0.3s ease;
-  background-color: var(--hover-bg-color);
-}
-.forecast-container .seven-days label .day-container {
+.forecast-container .seven-days div .day-container {
   display: flex;
   align-items: center;
 }
-.forecast-container .seven-days label .day-container img {
+.forecast-container .seven-days div .day-container img {
   width: 35px;
 }
-.forecast-container .seven-days label span {
+.forecast-container .seven-days div span {
   padding: 5px;
 }
 
@@ -278,4 +270,96 @@
 
 .btn {
   text-transform: capitalize;
+}
+
+.none-container, .err-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 3em;
+  gap: 1.5em;
+}
+.none-container img, .err-container img {
+  width: 40%;
+}
+
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10em;
+}
+.loader-container .loader {
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 8px solid;
+  border-color: #000 rgba(0, 0, 0, 0);
+  animation: l1 1s infinite;
+}
+@keyframes l1 {
+  to {
+    transform: rotate(0.5turn);
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .wrapper .weather-container {
+    width: 80%;
+  }
+  .current-weather .header {
+    font-size: 1.25em;
+  }
+  .current-weather .time {
+    font-size: 0.6em;
+  }
+  .current-weather .main-details img {
+    max-width: 40%;
+  }
+  .current-weather .main-details .weather-box .weather {
+    font-size: 2em;
+    font-weight: 600;
+  }
+  .current-weather .details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7em;
+  }
+  .current-weather .details .detail-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .popular-cities .header {
+    font-size: 1em;
+  }
+  .popular-cities .cities button {
+    font-size: 0.85em;
+  }
+  .forecast-container {
+    gap: 4px;
+  }
+  .forecast-container .header {
+    font-size: 1.15em;
+  }
+  .forecast-container .header span:nth-child(1) {
+    font-size: 1em;
+  }
+  .forecast-container .header span:nth-child(2) {
+    font-size: 0.7em;
+  }
+  .forecast-container .seven-days {
+    gap: 4px;
+  }
+  .forecast-container .seven-days div {
+    font-size: 0.85em;
+  }
+  .forecast-container .seven-days div .day-container img {
+    width: 30px;
+  }
+  .leaflet-container {
+    height: 19em;
+  }
 }/*# sourceMappingURL=style.css.map */

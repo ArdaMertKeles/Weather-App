@@ -3,38 +3,43 @@ import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import WaterDropIcon from '@mui/icons-material/WaterDrop';
 import WavesIcon from '@mui/icons-material/Waves';
 
-export const CurrentWeather = () => {
+export const CurrentWeather = ({ currentData }) => {
 
+    const date = new Date();
+    const showTime = date.getHours() 
+        + ':' + date.getMinutes() 
+
+    if(currentData.length === 0) return
     return (
         <div className='current-weather'>
             <span className="header">Current Weather</span>
-            <span className="time">6:25 AM</span>
+            <span className="time">{showTime}</span>
             <div className="main-details">
-                <img draggable='false' src="https://openweathermap.org/img/wn/10d@2x.png" alt="" />
+                <img draggable='false' src={`https://openweathermap.org/img/wn/${currentData.weather[0].icon}@2x.png`} alt="" />
                 <div className="weather-box">
                     <div className='weather'>
-                        <p>24</p>
+                        <p>{Math.floor(currentData.main.temp)}</p>
                         <p>°C</p>
                     </div>
-                    <p>Heavy Rain</p>
+                    <p className='description'>{currentData.weather[0].description}</p>
                 </div>
             </div>
             <div className="details">
                 <div className="detail-box">
                     <WavesIcon />
-                    <p>173</p>
+                    <p>{currentData.main.sea_level}</p>
                 </div>
                 <div className="detail-box">
                     <WaterDropIcon />
-                    <p>92%</p>
+                    <p>{currentData.main.humidity}%</p>
                 </div>
                 <div className="detail-box">
                     <AirIcon />
-                    <p>6 km/h</p>
+                    <p>{Math.floor(currentData.wind.speed)} km/h</p>
                 </div>
                 <div className="detail-box">
                     <WbSunnyIcon />
-                    <p>3</p>
+                    <p>{Math.floor(currentData.main.feels_like)}</p>
                 </div>
             </div>
         </div>

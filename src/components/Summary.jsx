@@ -2,14 +2,22 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import { SparkLineChart } from '@mui/x-charts/SparkLineChart';
 
-export const Summary = ({ isDark }) => {
+export const Summary = ({ isDark, hourlyData }) => {
+
+    if (!hourlyData || !hourlyData.list) return null;
+
+    const temperatures = hourlyData.list.map(entry => entry.main.temp);
+    const times = hourlyData.list.map(entry => {
+        const date = new Date(entry.dt_txt);
+        return date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+    });
 
     return (
         <Stack className='summary-container' direction="column" sx={{ width: '72.5%' }}>
             <span className='header'>Summary</span>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <SparkLineChart
-                    data={[27, 30, 18, 38, 25, 23, 30]}
+                    data={temperatures}
                     height={230}
                     curve="sharp"
                     area
@@ -25,15 +33,14 @@ export const Summary = ({ isDark }) => {
                         mt: 1
                     }}
                 >
-                    {["12:00", "14:00", "16:00", "18:00", "20:00", "22:00", "24:00"].map((time, index) => (
+                    {times.map((time, index) => (
                         <div key={index} className='temperature-box' style={{ textAlign: 'center', minWidth: '50px' }}>
                             <span>{time}</span>
-                            <span>{`${[27, 30, 18, 38, 25, 23, 30][index]}°C`}</span>
+                            <span>{`${Math.floor(temperatures[index])}°C`}</span>
                         </div>
                     ))}
                 </Box>
             </Box>
         </Stack>
-
     )
 }

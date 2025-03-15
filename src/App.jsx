@@ -10,33 +10,50 @@ import { SearchLocation } from "./components/SearchLocation"
 import { styled } from '@mui/material/styles';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
+import svg from './assets/undraw_weather_7n28.svg'
+import errorSvg from './assets/undraw_page-not-found_6wni.svg'
 
 function App() {
 
   const apiKey = process.env.REACT_APP_API_KEY
 
+  const [city, setCity] = useState('')
   const [lat, setLat] = useState(null)
   const [lon, setLon] = useState(null)
   const [search, setSearch] = useState(false)
   const [isDark, setIsDark] = useState(true)
+  const [dailyData, setDailyData] = useState([])
+  const [hourlyData, setHourlyData] = useState([])
+  const [currentData, setCurrentData] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [searchErr, setSearchErr] = useState(false)
 
-
-  const searchCityData = async () => {
-    const city = await axios.get(`https://api.openweathermap.org/geo/1.0/direct?q=${'istanbul'}&limit=1&appid=${apiKey}`)
-    setLat(city.data[0].lat)
-    setLon(city.data[0].lon)
-    setSearch(true)
+  const searchCityData = async (e) => {
+    e.preventDefault()
+    if (city.length > 1) {
+      const cityData = await axios.get(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`)
+      if (cityData.data.length !== 0) {
+        setLat(cityData.data[0].lat)
+        setLon(cityData.data[0].lon)
+        setSearchErr(false)
+      } else {
+        setSearchErr(true)
+      }
+      setSearch(true)
+    }
   }
 
   useEffect(() => {
-    searchCityData()
-    if (search === true) {
+    if (search === true && lat && lon) {
       const weatherData = async () => {
-        // const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`)
-        const response = await axios.get(`https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=${7}&appid=${apiKey}`)
-        console.log(response)
-        // const deneme = await axios.get(`https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=7&appid=${apiKey}&units=metric`)
-        // console.log(deneme)
+        setIsLoading(true)
+        const dailyData = await axios.get(`https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=${7}&appid=${apiKey}&units=metric`)
+        const hourlyData = await axios.get(`https://pro.openweathermap.org/data/2.5/forecast/hourly?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&cnt=7`)
+        const currentData = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`)
+        setDailyData(dailyData.data)
+        setHourlyData(hourlyData.data)
+        setCurrentData(currentData.data)
+        setIsLoading(false)
       }
       weatherData();
     }
@@ -108,21 +125,32 @@ function App() {
       <div className="weather-container">
         <div className="header-container">
           <span className="search-input">
-            <SearchLocation />
+            <SearchLocation search={searchCityData} setCity={setCity} />
           </span>
           <FormControlLabel
             control={memoizedSwitch}
           />
         </div>
-        <div className="top-container">
-          <CurrentWeather />
-          {lat && lon && <Map lat={lat} lon={lon} isDark={isDark} />}
-          <PopularCities />
-        </div>
-        <div className="bottom-container">
-          <Forecast />
-          <Summary isDark={isDark} />
-        </div>
+        {!isLoading && !searchErr && <div className="top-container">
+          <CurrentWeather currentData={currentData} />
+          {lat && lon && <Map lat={lat} lon={lon} isDark={isDark} currentData={currentData} />}
+          <PopularCities dailyData={dailyData} setLat={setLat} setLon={setLon} apiKey={apiKey} />
+        </div>}
+        {!isLoading && !searchErr && <div className="bottom-container">
+          <Forecast dailyData={dailyData} />
+          <Summary isDark={isDark} hourlyData={hourlyData} />
+        </div>}
+        {!search && !isLoading && <div className="none-container">
+          <p>Search for a City</p>
+          <img src={svg} alt="" />
+        </div>}
+        {searchErr && <div className="err-container">
+          <p>No city data found</p>
+          <img src={errorSvg} alt="" />
+        </div>}
+        {isLoading && <div className="loader-container">
+          <div className="loader"></div>
+        </div>}
       </div>
     </div>
   );

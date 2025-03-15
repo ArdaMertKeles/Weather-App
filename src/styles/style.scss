@@ -81,6 +81,7 @@ $dark-hover-bg: #5d5d5d;
         display: flex;
         flex-direction: column;
         width: 65%;
+        min-height: 80%;
         gap: 1em;
         background-color: var(--bg-color);
         border-radius: 1em;
@@ -171,8 +172,11 @@ $dark-hover-bg: #5d5d5d;
             flex-direction: column;
             .weather{
                 display: flex;
-                font-size: 2.75em;
+                font-size: 2.25em;
                 font-weight: 600;
+            }
+            .description{
+                text-transform: capitalize;
             }
         }
     }
@@ -245,24 +249,12 @@ $dark-hover-bg: #5d5d5d;
         display: flex;
         flex-direction: column;
         gap: 4px;
-        input{
-            display: none;
-        }
-        input[type="radio"]:checked + label {
-            background-color: var(--hover-bg-color);
-        }
-        label{
+        div{
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.8em;
-            transition: 0.3s ease;
+            font-size: 0.85em;
             border-radius: 4px;
-            cursor: pointer;
-            &:hover{
-                transition: 0.3s ease;
-                background-color: var(--hover-bg-color);
-            }
             .day-container{
                 display: flex;
                 align-items: center;
@@ -314,4 +306,119 @@ $dark-hover-bg: #5d5d5d;
 
 .btn{
     text-transform: capitalize;
+}
+
+// None Container Component
+.none-container, .err-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    gap: 1.5em;
+    img{
+        width: 40%;
+    }
+}
+
+.loader-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10em;
+    .loader {
+        width: 50px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        border: 8px solid;
+        border-color: #000 #0000;
+        animation: l1 1s infinite;
+    }
+    @keyframes l1 {to{transform: rotate(.5turn)}}
+}
+
+// Responsive Designs
+@media only screen and (max-width: 1200px) {
+    .wrapper{
+        .weather-container{
+            width: 80%;
+        }
+    }
+    .search-location{
+        
+    }
+    .current-weather{
+        .header{
+            font-size: 1.25em;
+        }
+        .time{
+            font-size: 0.6em;
+        }
+        .main-details{
+            img{
+                max-width: 40%;
+            }
+            .weather-box{
+                .weather{
+                    font-size: 2em;
+                    font-weight: 600;
+                }
+            }
+        }
+        .details{
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7em;
+            .detail-box{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    }
+    .popular-cities{
+    .header{
+        font-size: 1em;
+    }
+    .cities{
+        button{
+            font-size: 0.85em;
+        }
+    }
+    }
+    .forecast-container{
+    gap: 4px;
+    .header{
+        font-size: 1.15em;
+        span{
+            &:nth-child(1){
+                font-size: 1em;
+            }
+            &:nth-child(2){
+                font-size: 0.7em;
+            }
+        }
+    }
+    .seven-days{
+        gap: 4px;
+        div{
+            font-size: 0.85em;
+            .day-container{
+                img{
+                    width: 30px;
+                }
+            }
+        }
+    }
+    }
+    .summary-container{
+
+    }
+    .leaflet-container{
+        height: 19em;
+    }
+    .none-container, .err-container{
+
+    }
 }
