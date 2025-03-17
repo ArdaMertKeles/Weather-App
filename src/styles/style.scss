@@ -154,12 +154,16 @@ $dark-hover-bg: #5d5d5d;
     background-color: var(--current-weather-bg-color);
     gap: 4px;
     width: 22%;
-    .header{
-        font-size: 1.5em;
-        font-weight: 600;
-    }
-    .time{
-        font-size: 0.8em;
+    .time-details{
+        display: flex;
+        flex-direction: column;
+        .header{
+            font-size: 1.5em;
+            font-weight: 600;
+        }
+        .time{
+            font-size: 0.7em;
+        }
     }
     .main-details{
         display: flex;
@@ -345,15 +349,14 @@ $dark-hover-bg: #5d5d5d;
             width: 80%;
         }
     }
-    .search-location{
-        
-    }
     .current-weather{
-        .header{
-            font-size: 1.25em;
-        }
-        .time{
-            font-size: 0.6em;
+        .time-details{
+            .header{
+                font-size: 1.25em;
+            }
+            .time{
+                font-size: 0.6em;
+            }
         }
         .main-details{
             img{
@@ -364,16 +367,6 @@ $dark-hover-bg: #5d5d5d;
                     font-size: 2em;
                     font-weight: 600;
                 }
-            }
-        }
-        .details{
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.7em;
-            .detail-box{
-                display: flex;
-                flex-direction: column;
-                align-items: center;
             }
         }
     }
@@ -412,13 +405,166 @@ $dark-hover-bg: #5d5d5d;
         }
     }
     }
-    .summary-container{
-
-    }
     .leaflet-container{
         height: 19em;
     }
-    .none-container, .err-container{
+}
 
+@media only screen and (max-width: 1000px) {
+    .wrapper{
+        .weather-container{
+            width: 90%;
+        }
+    }
+    .popular-cities{
+        gap: 5px;
+    .header{
+        font-size: 0.9em;
+    }
+    .cities{
+        button{
+            font-size: 0.75em;
+        }
+    }
+    }
+    .leaflet-container{
+        height: 18.2em;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .wrapper{
+        .weather-container{
+            width: 100%;
+        }
+    }
+    .current-weather{
+        .time-details{
+            .header{
+                font-size: 1.05em;
+            }
+            .time{
+                font-size: 0.6em;
+            }
+        }
+        .main-details{
+            img{
+                max-width: 35%;
+            }
+            .weather-box{
+                .weather{
+                    font-size: 1.5em;
+                    font-weight: 600;
+                }
+                .description{
+                    font-size: 0.75em;
+                }
+            }
+        }
+        .details{
+            font-size: 0.7em;
+            .detail-box{
+                svg{
+                    font-size: 1.7em;
+                }
+            }
+        }
+    }
+    .popular-cities{
+    .cities{
+        button{
+            font-size: 0.65em;
+        }
+    }
+    }
+    .forecast-container{
+        width: 22%;
+        gap: 8px;
+        .seven-days{
+            gap: 2px;
+            div{
+                font-size: 0.8em;
+                .day-container{
+                    img{
+                        width: 25px;
+                    }
+                }
+            }
+        }
+    }
+    .leaflet-container{
+        height: 17em;
+    }
+}
+
+@media only screen and (max-width: 770px) {
+    .wrapper{
+        min-height: 100vh;
+        height: auto;
+        .weather-container{
+            gap: 10px;
+            .top-container{    
+                .current-weather{
+                    .details{
+                        margin-top: 1em;
+                    }
+                }            
+            }
+            .bottom-container{
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                .forecast-container{
+                    width: 95%;
+                    .seven-days{
+                        flex-direction: row;
+                        justify-content: space-between;
+                        div{
+                            flex-direction: column;
+                        }
+                    }
+                }
+                .summary-container{
+                    width: 95%;
+                    padding: 1em;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .current-weather{
+        .main-details{
+            img{
+                width: 30%;
+            }
+            .weather-box{
+                .weather{
+                    font-size: 1.3em;
+                }
+                .description{
+                    font-size: 0.6em;
+                }
+            }
+        }
+        .details{
+            font-size: 0.55em;
+            .detail-box{
+                svg{
+                    font-size: 1.65em;
+                }
+            }
+        }
+    }
+    .popular-cities{
+        .header{
+            font-size: 0.7em;
+        }
+        .cities{
+            button{
+                font-size: 0.6em;
+            }
+        }
     }
 }

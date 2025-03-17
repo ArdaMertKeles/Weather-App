@@ -6,14 +6,16 @@ import WavesIcon from '@mui/icons-material/Waves';
 export const CurrentWeather = ({ currentData }) => {
 
     const date = new Date();
-    const showTime = date.getHours() 
-        + ':' + date.getMinutes() 
+    const showTime = date.getHours()
+        + ':' + date.getMinutes()
 
-    if(currentData.length === 0) return
+    if (currentData.length === 0) return
     return (
         <div className='current-weather'>
-            <span className="header">Current Weather</span>
-            <span className="time">{showTime}</span>
+            <div className="time-details">
+                <span className="header">Current Weather</span>
+                <span className="time">{showTime}</span>
+            </div>
             <div className="main-details">
                 <img draggable='false' src={`https://openweathermap.org/img/wn/${currentData.weather[0].icon}@2x.png`} alt="" />
                 <div className="weather-box">

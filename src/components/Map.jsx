@@ -20,5 +20,4 @@ export const Map = ({ lat, lon, isDark, currentData }) => {
             </Popup>
         </Marker>
     </MapContainer>
-
 }

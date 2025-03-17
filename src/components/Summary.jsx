@@ -1,11 +1,23 @@
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import { SparkLineChart } from '@mui/x-charts/SparkLineChart';
+import { useState, useEffect } from "react";
 
 export const Summary = ({ isDark, hourlyData }) => {
 
+    const [chartHeight, setChartHeight] = useState(230)
+    
+    useEffect(() => {
+        const handleResize = () => {
+            setChartHeight(window.innerWidth > 900 ? (1100 ? 230 : 200) : 180);
+        };
+        
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+    
     if (!hourlyData || !hourlyData.list) return null;
-
+    
     const temperatures = hourlyData.list.map(entry => entry.main.temp);
     const times = hourlyData.list.map(entry => {
         const date = new Date(entry.dt_txt);
@@ -18,7 +30,7 @@ export const Summary = ({ isDark, hourlyData }) => {
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <SparkLineChart
                     data={temperatures}
-                    height={230}
+                    height={chartHeight}
                     curve="sharp"
                     area
                     sx={{
